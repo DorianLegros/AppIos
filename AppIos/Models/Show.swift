@@ -10,17 +10,30 @@ import Foundation
 struct Show : Decodable{
     var id: Int
     var posterPath: String
-    var title: String
+    var name: String
     var overview: String
     var firstAirDate: String
     var voteAverage: Double
     
-    init(id: Int, posterPath:String, title:String, overview:String, firstAirDate: String, voteAverage: Double){
-        self.id = id
-        self.posterPath = posterPath
-        self.title = title
-        self.overview = overview
-        self.firstAirDate = firstAirDate
-        self.voteAverage = voteAverage
+    enum CodingKeys: String, CodingKey {
+        case id
+        case posterPath = "poster_path"
+        case name = "name"
+        case overview
+        case firstAirDate = "first_air_date"
+        case voteAverage = "vote_average"
+    }
+}
+
+struct ShowResult : Decodable {
+    let page: Int
+    let results: [Show]
+    let totalPages, totalResults: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case page = "page"
+        case results = "results"
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
     }
 }
