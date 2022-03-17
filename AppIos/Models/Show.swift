@@ -14,6 +14,7 @@ struct Show : Decodable{
     var overview: String
     var firstAirDate: String
     var voteAverage: Double
+    var originalCountry: [String]
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -22,6 +23,7 @@ struct Show : Decodable{
         case overview
         case firstAirDate = "first_air_date"
         case voteAverage = "vote_average"
+        case originalCountry = "origin_country"
     }
 }
 
