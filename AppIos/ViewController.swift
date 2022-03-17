@@ -7,10 +7,10 @@
 
 import UIKit
 
+let apiKey = "aad3716237ce5a86c2a02e2a48f662c1";
+let baseUrl = "https://api.themoviedb.org/3/tv/";
+
 class ViewController: UIViewController {
-    
-    let apiKey = "aad3716237ce5a86c2a02e2a48f662c1";
-    let baseUrl = "https://api.themoviedb.org/3/tv/";
     
     @IBOutlet weak var showsTable:UITableView!
     
@@ -43,12 +43,16 @@ class ViewController: UIViewController {
                   }
         }).resume();
     }
+    
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+            return 1
+    }
 }
 
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        debugPrint(showsList.count)
         return showsList.count;
     }
 
@@ -69,6 +73,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
          
      }
 }
+
 class ShowDetailsController : UIViewController{
     @IBOutlet weak var txtTitleDetail:UILabel!
     @IBOutlet weak var txtDescDetail:UILabel!
@@ -101,3 +106,100 @@ class ShowDetailsController : UIViewController{
     }
 }
 
+class TopController : UIViewController {
+    
+    @IBOutlet weak var label: UILabel!
+}
+
+class ShowSearchController : UITableViewController, UISearchBarDelegate {
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    
+    var showsSearchedList: [Show] = []
+    var searchActive : Bool = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        searchBar.delegate = self;
+        //showsSearchedTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+            searchActive = true;
+        }
+
+        func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+            searchActive = false;
+        }
+
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            searchActive = false;
+        }
+
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            searchActive = false;
+        }
+
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            
+            print("toto")
+            
+            let url = URL(string: baseUrl + "search/tv?api_key=" + apiKey + "&language=fr-FR&page=1&query=" + searchText + "&include_adult=false")!;
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                      if let error = error {
+                        return
+                      }
+                      guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode)
+                      else {
+                        debugPrint("Error with the response, unexpected status code: \(response)")
+                        debugPrint("Error with the response, unexpected status code:" + response.debugDescription)
+                        return
+                      }
+                      if let data = data {
+                        let shows = try! JSONDecoder().decode(ShowResult.self, from: data)
+                        DispatchQueue.main.async() {
+                            self.showsSearchedList = shows.results;
+                            //self.showsSearchedTable.reloadData();
+                        }
+                      } else {
+                        return
+                      }
+            }).resume();
+            
+            if(showsSearchedList.count == 0){
+                searchActive = false;
+            } else {
+                searchActive = true;
+            }
+            //self.showsSearchedTable.reloadData()
+        }
+
+        override func didReceiveMemoryWarning() {
+            super.didReceiveMemoryWarning()
+            // Dispose of any resources that can be recreated.
+        }
+}
+
+extension ShowSearchController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return showsSearchedList.count;
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell;
+        cell.onBind(data: showsSearchedList[indexPath.row])
+        return cell;
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+          return 1
+    }
+    // gérer le click sur une cellule
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         var showDetailView : ShowDetailsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "showDetailView")
+         showDetailView.showDetail = showsSearchedList[indexPath.row]
+         present(showDetailView, animated: false, completion: nil)
+         
+     }
+}
