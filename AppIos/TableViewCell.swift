@@ -27,17 +27,19 @@ class TableViewCell: UITableViewCell {
     func onBind(data: Show) {
         txtTitle.text = data.name;
         txtDesc.text = data.overview == "" ? "No description." : data.overview;
-        URLSession.shared.dataTask(with: URLRequest(url: URL(string: "https://image.tmdb.org/t/p/w342/\(data.posterPath)")!)) {
-            (data, req, error) in
-            
-            do {
-                var datas = try data
-                DispatchQueue.main.async {
-                    self.showImage.image = UIImage(data: datas!);
-                }
-            } catch {
+        if data.posterPath != nil {
+            URLSession.shared.dataTask(with: URLRequest(url: URL(string: "https://image.tmdb.org/t/p/w342/\(data.posterPath!)")!)) {
+                (data, req, error) in
                 
-            }
-        }.resume();
+                do {
+                    var datas = try data
+                    DispatchQueue.main.async {
+                        self.showImage.image = UIImage(data: datas!);
+                    }
+                } catch {
+                    
+                }
+            }.resume();
+        }
     }
 }

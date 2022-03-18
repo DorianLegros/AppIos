@@ -8,13 +8,13 @@
 import Foundation
 
 struct Show : Decodable{
-    var id: Int
-    var posterPath: String
-    var name: String
-    var overview: String
-    var firstAirDate: String
-    var voteAverage: Double
-    var originalCountry: [String]
+    var id: Int?
+    var posterPath: String?
+    var name: String?
+    var overview: String?
+    var firstAirDate: String?
+    var voteAverage: Double?
+    var originalCountry: [String]?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,9 +28,9 @@ struct Show : Decodable{
 }
 
 struct ShowResult : Decodable {
-    let page: Int
-    let results: [Show]
-    let totalPages, totalResults: Int
+    let page: Int?
+    let results: [Show]?
+    let totalPages, totalResults: Int?
     
     enum CodingKeys: String, CodingKey {
         case page = "page"
