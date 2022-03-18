@@ -87,7 +87,7 @@ class ShowDetailsController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad();
         txtTitleDetail.text = showDetail!.name
-        txtDescDetail.text = showDetail!.overview == "" ? "Synopsis pas disponible" : showDetail!.overview;
+        txtDescDetail.text = showDetail!.overview == "" ? "Synopsis indisponible" : showDetail!.overview;
         txtVoteAverageDetail.text = String(showDetail!.voteAverage!) + " / 10 "
         txtFirstAirDateDetail.text = showDetail!.firstAirDate
         txtOriginalCountryDetail.text = showDetail!.originalCountry![0]
@@ -190,8 +190,22 @@ class ShowSearchController : UITableViewController, UISearchBarDelegate {
 
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "searchedShowCell", for: indexPath) as! SearchedShowTableCell;
-            //cell.searchedShowTitle?.text = showsSearchedList[indexPath.row].name;
-            //cell.searchedShowDescription?.text = showsSearchedList[indexPath.row].overview;
+            cell.searchedShowTitle?.text = showsSearchedList[indexPath.row].name;
+            cell.searchedShowDescription?.text = showsSearchedList[indexPath.row].overview == "" ? "Synopsis indisponible" : showsSearchedList[indexPath.row].overview;
+            if showsSearchedList[indexPath.row].posterPath != nil {
+                URLSession.shared.dataTask(with: URLRequest(url: URL(string: "https://image.tmdb.org/t/p/w342/\(showsSearchedList[indexPath.row].posterPath!)")!)) {
+                    (data, req, error) in
+                    
+                    do {
+                        var datas = try data
+                        DispatchQueue.main.async {
+                            cell.searchedShowImage.image = UIImage(data: datas!);
+                        }
+                    } catch {
+                        
+                    }
+                }.resume();
+            }
             return cell;
         }
         

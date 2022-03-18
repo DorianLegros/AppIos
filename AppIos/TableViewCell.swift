@@ -26,7 +26,7 @@ class TableViewCell: UITableViewCell {
     
     func onBind(data: Show) {
         txtTitle.text = data.name;
-        txtDesc.text = data.overview == "" ? "No description." : data.overview;
+        txtDesc.text = data.overview == "" ? "Synopsis indisponible" : data.overview;
         if data.posterPath != nil {
             URLSession.shared.dataTask(with: URLRequest(url: URL(string: "https://image.tmdb.org/t/p/w342/\(data.posterPath!)")!)) {
                 (data, req, error) in
