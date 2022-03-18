@@ -10,7 +10,7 @@ import UIKit
 let apiKey = "aad3716237ce5a86c2a02e2a48f662c1";
 let baseUrl = "https://api.themoviedb.org/3/";
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
     
     @IBOutlet weak var showsTable:UITableView!
     
@@ -18,8 +18,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        showsTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         
         let url = URL(string: baseUrl + "tv/airing_today?api_key=" + apiKey + "&language=fr-FR")!;
         URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
@@ -36,7 +34,7 @@ class ViewController: UIViewController {
                     let shows = try! JSONDecoder().decode(ShowResult.self, from: data)
                     DispatchQueue.main.async() {
                         self.showsList = shows.results!;
-                        self.showsTable.reloadData();
+                        self.tableView.reloadData();
                     }
                   } else {
                     return
@@ -44,35 +42,52 @@ class ViewController: UIViewController {
         }).resume();
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return showsList.count;
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "showCell", for: indexPath) as! ShowTableCell;
+        cell.showTitle?.text = showsList[indexPath.row].name;
+        cell.showDesc?.text = showsList[indexPath.row].overview == "" ? "Synopsis indisponible" : showsList[indexPath.row].overview;
+        if showsList[indexPath.row].posterPath != nil {
+            URLSession.shared.dataTask(with: URLRequest(url: URL(string: "https://image.tmdb.org/t/p/w342/\(showsList[indexPath.row].posterPath!)")!)) {
+                (data, req, error) in
+                
+                do {
+                    var datas = try data
+                    DispatchQueue.main.async {
+                        cell.showImage.image = UIImage(data: datas!);
+                    }
+                } catch {
+                    
+                }
+            }.resume();
+        }
+        return cell;
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+          return 1
+      }
+    // gérer le click sur une cellule
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         var showDetailView : ShowDetailsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "showDetailView")
+         showDetailView.showDetail = showsList[indexPath.row]
+         present(showDetailView, animated: false, completion: nil)
+     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
             return 1
     }
 }
 
-
-extension ViewController : UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return showsList.count;
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell;
-        cell.onBind(data: showsList[indexPath.row])
-        return cell;
-    }
-    
-   func numberOfSections(in tableView: UITableView) -> Int {
-          return 1
-      }
-    // gérer le click sur une cellule
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         var showDetailView : ShowDetailsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "showDetailView")
-         showDetailView.showDetail = showsList[indexPath.row]
-         present(showDetailView, animated: false, completion: nil)
-         
-     }
+class ShowTableCell : UITableViewCell {
+    @IBOutlet weak var showTitle:UILabel!
+    @IBOutlet weak var showDesc:UILabel!
+    @IBOutlet weak var showImage:UIImageView!
 }
+
 
 class ShowDetailsController : UIViewController{
     @IBOutlet weak var txtTitleDetail:UILabel!
@@ -89,8 +104,8 @@ class ShowDetailsController : UIViewController{
         txtTitleDetail.text = showDetail!.name
         txtDescDetail.text = showDetail!.overview == "" ? "Synopsis indisponible" : showDetail!.overview;
         txtVoteAverageDetail.text = String(showDetail!.voteAverage!) + " / 10 "
-        txtFirstAirDateDetail.text = showDetail!.firstAirDate
-        txtOriginalCountryDetail.text = showDetail!.originalCountry![0]
+        txtFirstAirDateDetail.text = showDetail!.firstAirDate != "" ? showDetail!.firstAirDate : "Inconnue";
+        txtOriginalCountryDetail.text = showDetail!.originalCountry!.count < 1 ? "Non précisée" : showDetail!.originalCountry![0];
         if showDetail!.posterPath != nil {
             URLSession.shared.dataTask(with: URLRequest(url: URL(string: "https://image.tmdb.org/t/p/w342/\(showDetail!.posterPath!)")!)) {
                 (data, req, error) in
@@ -144,13 +159,9 @@ class ShowSearchController : UITableViewController, UISearchBarDelegate {
         }
 
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String?) {
-            
-            print("toto")
-            print(searchText)
             if searchText == nil { return };
-            //let url = URL(string: baseUrl + "search/tv?api_key=" + apiKey + "&language=fr-FR&page=1&query=" + searchText! + "&include_adult=false")!;
             let encodedSearchText = searchText!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed);
-                        let url = URL(string: baseUrl + "search/tv?api_key=" + apiKey + "&language=fr-FR&page=1&query=" + encodedSearchText! + "&include_adult=false")!;
+            let url = URL(string: baseUrl + "search/tv?api_key=" + apiKey + "&language=fr-FR&page=1&query=" + encodedSearchText! + "&include_adult=false")!;
             URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                       if let error = error {
                         return
@@ -225,11 +236,8 @@ class ShowSearchController : UITableViewController, UISearchBarDelegate {
 }
 
 class SearchedShowTableCell : UITableViewCell {
-    //@IBOutlet weak var searchedShowImage: UIImageView!
     @IBOutlet weak var searchedShowImage: UIImageView!
-    //@IBOutlet weak var searchedShowTitle: UILabel!
     @IBOutlet weak var searchedShowTitle: UILabel!
-    //@IBOutlet weak var searchedShowDescription: UILabel!feef
     @IBOutlet weak var searchedShowDescription: UILabel!
 }
 
@@ -296,10 +304,7 @@ class TopShowController : UITableViewController {
 }
 
 class TopShowTableCell : UITableViewCell {
-    //@IBOutlet weak var searchedShowImage: UIImageView!
     @IBOutlet weak var topShowImage: UIImageView!
-    //@IBOutlet weak var searchedShowTitle: UILabel!
     @IBOutlet weak var topShowTitle: UILabel!
-    //@IBOutlet weak var searchedShowDescription: UILabel!feef
     @IBOutlet weak var topShowDescription: UILabel!
 }

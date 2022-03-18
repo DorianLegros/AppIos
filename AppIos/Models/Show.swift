@@ -14,7 +14,7 @@ struct Show : Decodable{
     var overview: String?
     var firstAirDate: String?
     var voteAverage: Double?
-    var originalCountry: [String]?
+    var originalCountry: [String]? = []
     
     enum CodingKeys: String, CodingKey {
         case id

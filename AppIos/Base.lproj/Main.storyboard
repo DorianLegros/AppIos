@@ -9,6 +9,91 @@
     </dependencies>
     <scenes>
         <!--Accueil-->
+        <scene sceneID="I3D-hb-oGz">
+            <objects>
+                <tableViewController id="ROz-eD-bpj" customClass="ViewController" customModule="AppIos" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="W2i-DQ-VMu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHOWTIME | Aujourd'hui" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SMe-5P-Bvp">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="26"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="ZUZ-GC-716"/>
+                                <constraint firstAttribute="width" constant="243" id="c0D-QC-gcr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="showCell" rowHeight="145" id="Xrm-rN-zeb" customClass="ShowTableCell" customModule="AppIos" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="70.5" width="414" height="145"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xrm-rN-zeb" id="ZBt-iG-UsL">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="145"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wN6-jy-3M0">
+                                            <rect key="frame" x="8" y="9" width="98" height="128"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="128" id="Sbp-th-29x"/>
+                                                <constraint firstAttribute="width" constant="98" id="iiv-eC-LOf"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4Z-qc-mbO">
+                                            <rect key="frame" x="114" y="9" width="280" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="280" id="6Qp-Rx-U1b"/>
+                                                <constraint firstAttribute="height" constant="40" id="mau-I0-sgb"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJx-1V-7Me">
+                                            <rect key="frame" x="114" y="38" width="280" height="96"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="96" id="geg-SL-mqs"/>
+                                                <constraint firstAttribute="width" constant="280" id="njb-sL-EVE"/>
+                                            </constraints>
+                                            <string key="text">Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label</string>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="oJx-1V-7Me" firstAttribute="top" secondItem="ZBt-iG-UsL" secondAttribute="topMargin" constant="27" id="A7F-8E-0lc"/>
+                                        <constraint firstItem="oJx-1V-7Me" firstAttribute="leading" secondItem="wN6-jy-3M0" secondAttribute="trailing" constant="8" symbolic="YES" id="Fyx-JS-5vG"/>
+                                        <constraint firstItem="wN6-jy-3M0" firstAttribute="top" secondItem="ZBt-iG-UsL" secondAttribute="top" constant="9" id="YnZ-Kx-NNY"/>
+                                        <constraint firstItem="b4Z-qc-mbO" firstAttribute="leading" secondItem="wN6-jy-3M0" secondAttribute="trailing" constant="8" symbolic="YES" id="ZnF-hN-1JB"/>
+                                        <constraint firstItem="oJx-1V-7Me" firstAttribute="bottom" secondItem="ZBt-iG-UsL" secondAttribute="bottomMargin" id="iOD-hD-NL0"/>
+                                        <constraint firstItem="b4Z-qc-mbO" firstAttribute="top" secondItem="ZBt-iG-UsL" secondAttribute="top" constant="9" id="koA-Ob-aFD"/>
+                                        <constraint firstAttribute="bottom" secondItem="b4Z-qc-mbO" secondAttribute="bottom" constant="96" id="pUX-D5-K92"/>
+                                        <constraint firstItem="wN6-jy-3M0" firstAttribute="leading" secondItem="ZBt-iG-UsL" secondAttribute="leading" constant="8" id="qCU-gt-hii"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="showDesc" destination="oJx-1V-7Me" id="fZf-bk-zH5"/>
+                                    <outlet property="showImage" destination="wN6-jy-3M0" id="xxN-34-pwg"/>
+                                    <outlet property="showTitle" destination="b4Z-qc-mbO" id="qj6-hc-sVk"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ROz-eD-bpj" id="SD2-ad-EqC"/>
+                            <outlet property="delegate" destination="ROz-eD-bpj" id="Oef-Uc-fSI"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Accueil" image="house" catalog="system" id="xEs-QU-KvW"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cSh-RL-DJr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="917" y="-560"/>
+        </scene>
+        <!--Accueil-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AppIos" customModuleProvider="target" sceneMemberID="viewController">
@@ -117,6 +202,9 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1M-uG-pk0">
                                 <rect key="frame" x="17" y="372" width="47" height="18.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="47" id="qxc-QX-A0i"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -201,7 +289,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="tXI-o2-3Mp">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Saisissez le nom de la série à rechercher" id="tXI-o2-3Mp">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
@@ -289,16 +377,16 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="as1-94-ube"/>
-                        <segue destination="Ybz-Es-3Yu" kind="relationship" relationship="viewControllers" id="TpZ-qa-koN"/>
+                        <segue destination="ROz-eD-bpj" kind="relationship" relationship="viewControllers" id="5Uh-PT-xJK"/>
                         <segue destination="GoL-h7-v62" kind="relationship" relationship="viewControllers" id="bYq-dz-wGj"/>
+                        <segue destination="Ybz-Es-3Yu" kind="relationship" relationship="viewControllers" id="TpZ-qa-koN"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5I-Nq-eQy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="83.705357142857139"/>
         </scene>
-        <!--Top Série-->
+        <!--Top séries-->
         <scene sceneID="fVS-Ms-xYa">
             <objects>
                 <tableViewController id="GoL-h7-v62" customClass="TopShowController" customModule="AppIos" customModuleProvider="target" sceneMemberID="viewController">
@@ -306,9 +394,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHOWTIME | Top séries" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yXc-6m-Ng4">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="26"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="PPT-bs-oIT"/>
+                                <constraint firstAttribute="width" constant="243" id="hmg-Od-rLm"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="topShowCell" rowHeight="156" id="CuE-OY-6qk" customClass="TopShowTableCell" customModule="AppIos" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="156"/>
+                                <rect key="frame" x="0.0" y="70.5" width="414" height="156"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CuE-OY-6qk" id="GYe-kv-yG3">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="156"/>
@@ -365,7 +464,7 @@
                             <outlet property="delegate" destination="GoL-h7-v62" id="fdx-ro-rgj"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Top Série" image="star" catalog="system" id="50t-RK-F0z"/>
+                    <tabBarItem key="tabBarItem" title="Top séries" image="star" catalog="system" id="50t-RK-F0z"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3rg-Sf-XLj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
