@@ -13,6 +13,10 @@
 		D3289E3D27E0C4E400087B4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3289E3B27E0C4E400087B4D /* Main.storyboard */; };
 		D3289E3F27E0C4E600087B4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3289E3E27E0C4E600087B4D /* Assets.xcassets */; };
 		D3289E4227E0C4E600087B4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3289E4027E0C4E600087B4D /* LaunchScreen.storyboard */; };
+		D3289E4B27E0E0E400087B4D /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3289E4A27E0E0E400087B4D /* Show.swift */; };
+		D3289E4E27E0E60100087B4D /* ShowServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3289E4D27E0E60100087B4D /* ShowServices.swift */; };
+		D37A95E227E1DB09001D2A2A /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A95E027E1DB09001D2A2A /* TableViewCell.swift */; };
+		D37A95E327E1DB09001D2A2A /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D37A95E127E1DB09001D2A2A /* TableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		D3289E3E27E0C4E600087B4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3289E4127E0C4E600087B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3289E4327E0C4E600087B4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3289E4A27E0E0E400087B4D /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		D3289E4D27E0E60100087B4D /* ShowServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowServices.swift; sourceTree = "<group>"; };
+		D37A95E027E1DB09001D2A2A /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		D37A95E127E1DB09001D2A2A /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +64,8 @@
 		D3289E3427E0C4E400087B4D /* AppIos */ = {
 			isa = PBXGroup;
 			children = (
+				D3289E4C27E0E5DB00087B4D /* Services */,
+				D3289E4927E0E08400087B4D /* Models */,
 				D3289E3527E0C4E400087B4D /* AppDelegate.swift */,
 				D3289E3727E0C4E400087B4D /* SceneDelegate.swift */,
 				D3289E3927E0C4E400087B4D /* ViewController.swift */,
@@ -63,8 +73,26 @@
 				D3289E3E27E0C4E600087B4D /* Assets.xcassets */,
 				D3289E4027E0C4E600087B4D /* LaunchScreen.storyboard */,
 				D3289E4327E0C4E600087B4D /* Info.plist */,
+				D37A95E027E1DB09001D2A2A /* TableViewCell.swift */,
+				D37A95E127E1DB09001D2A2A /* TableViewCell.xib */,
 			);
 			path = AppIos;
+			sourceTree = "<group>";
+		};
+		D3289E4927E0E08400087B4D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D3289E4A27E0E0E400087B4D /* Show.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D3289E4C27E0E5DB00087B4D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D3289E4D27E0E60100087B4D /* ShowServices.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3289E4227E0C4E600087B4D /* LaunchScreen.storyboard in Resources */,
+				D37A95E327E1DB09001D2A2A /* TableViewCell.xib in Resources */,
 				D3289E3F27E0C4E600087B4D /* Assets.xcassets in Resources */,
 				D3289E3D27E0C4E400087B4D /* Main.storyboard in Resources */,
 			);
@@ -140,7 +169,10 @@
 			files = (
 				D3289E3A27E0C4E400087B4D /* ViewController.swift in Sources */,
 				D3289E3627E0C4E400087B4D /* AppDelegate.swift in Sources */,
+				D3289E4B27E0E0E400087B4D /* Show.swift in Sources */,
+				D37A95E227E1DB09001D2A2A /* TableViewCell.swift in Sources */,
 				D3289E3827E0C4E400087B4D /* SceneDelegate.swift in Sources */,
+				D3289E4E27E0E60100087B4D /* ShowServices.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

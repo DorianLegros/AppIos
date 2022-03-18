@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="149" id="KGk-i7-Jjw" customClass="TableViewCell" customModule="AppIos" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="475" height="149"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="475" height="149"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5c-hb-i2m">
+                        <rect key="frame" x="129" y="8" width="338" height="26"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swB-FE-Nwd">
+                        <rect key="frame" x="129" y="42" width="338" height="81.5"/>
+                        <string key="text">LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bvE-fn-Sji">
+                        <rect key="frame" x="12" y="8" width="98" height="128"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="128" id="MfJ-6e-Iyi"/>
+                            <constraint firstAttribute="width" constant="98" id="Y8h-pa-ZR7"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="bvE-fn-Sji" secondAttribute="bottom" constant="13" id="NSH-q9-mae"/>
+                    <constraint firstItem="swB-FE-Nwd" firstAttribute="top" secondItem="y5c-hb-i2m" secondAttribute="bottom" constant="8" symbolic="YES" id="Rdw-b7-IRx"/>
+                    <constraint firstAttribute="bottom" secondItem="swB-FE-Nwd" secondAttribute="bottom" constant="23.5" id="Tr8-WQ-JyZ"/>
+                    <constraint firstItem="bvE-fn-Sji" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="aZV-6c-tOX"/>
+                    <constraint firstItem="swB-FE-Nwd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="108" id="iOc-EZ-JkE"/>
+                    <constraint firstItem="y5c-hb-i2m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="jkh-8y-9DM"/>
+                    <constraint firstAttribute="trailing" secondItem="swB-FE-Nwd" secondAttribute="trailing" constant="29" id="nfQ-gf-baV"/>
+                    <constraint firstItem="bvE-fn-Sji" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="nh0-Kt-N4X"/>
+                    <constraint firstItem="y5c-hb-i2m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="108" id="tNn-SE-wdc"/>
+                    <constraint firstAttribute="trailing" secondItem="y5c-hb-i2m" secondAttribute="trailing" constant="29" id="tfe-qu-9gH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="showImage" destination="bvE-fn-Sji" id="sOn-Rm-MTq"/>
+                <outlet property="txtDesc" destination="swB-FE-Nwd" id="E2v-u9-24t"/>
+                <outlet property="txtTitle" destination="y5c-hb-i2m" id="fhz-vt-9rR"/>
+            </connections>
+            <point key="canvasLocation" x="250.00000000000003" y="164.39732142857142"/>
+        </tableViewCell>
+    </objects>
+</document>
