@@ -148,7 +148,9 @@ class ShowSearchController : UITableViewController, UISearchBarDelegate {
             print("toto")
             print(searchText)
             if searchText == nil { return };
-            let url = URL(string: baseUrl + "search/tv?api_key=" + apiKey + "&language=fr-FR&page=1&query=" + searchText! + "&include_adult=false")!;
+            //let url = URL(string: baseUrl + "search/tv?api_key=" + apiKey + "&language=fr-FR&page=1&query=" + searchText! + "&include_adult=false")!;
+            let encodedSearchText = searchText!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed);
+                        let url = URL(string: baseUrl + "search/tv?api_key=" + apiKey + "&language=fr-FR&page=1&query=" + encodedSearchText! + "&include_adult=false")!;
             URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                       if let error = error {
                         return
@@ -229,4 +231,75 @@ class SearchedShowTableCell : UITableViewCell {
     @IBOutlet weak var searchedShowTitle: UILabel!
     //@IBOutlet weak var searchedShowDescription: UILabel!feef
     @IBOutlet weak var searchedShowDescription: UILabel!
+}
+
+class TopShowController : UITableViewController {
+    var showsTopShowList: [Show] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let url = URL(string: baseUrl + "tv/top_rated?api_key=" + apiKey + "&language=fr-FR&page=1&")!;
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                  if let error = error {
+                    return
+                  }
+                  guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode)
+                  else {
+                    debugPrint("Error with the response, unexpected status code: \(response)")
+                    debugPrint("Error with the response, unexpected status code:" + response.debugDescription)
+                    return
+                  }
+                  if let data = data {
+                    let shows = try! JSONDecoder().decode(ShowResult.self, from: data)
+                    DispatchQueue.main.async() {
+                        debugPrint(shows.results)
+                        self.showsTopShowList = shows.results!;
+                        self.tableView.reloadData();
+                    }
+                  } else {
+                    return
+                  }
+        }).resume();
+    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return showsTopShowList.count;
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "topShowCell", for: indexPath) as! TopShowTableCell;
+        cell.topShowTitle?.text = showsTopShowList[indexPath.row].name;
+        cell.topShowDescription?.text = showsTopShowList[indexPath.row].overview == "" ? "Synopsis indisponible" : showsTopShowList[indexPath.row].overview;
+        if showsTopShowList[indexPath.row].posterPath != nil {
+            URLSession.shared.dataTask(with: URLRequest(url: URL(string: "https://image.tmdb.org/t/p/w342/\(showsTopShowList[indexPath.row].posterPath!)")!)) {
+                (data, req, error) in
+                
+                do {
+                    var datas = try data
+                    DispatchQueue.main.async {
+                        cell.topShowImage.image = UIImage(data: datas!);
+                    }
+                } catch {
+                    
+                }
+            }.resume();
+        }
+        return cell;
+    }
+    // gérer le click sur une cellule
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         var showDetailView : ShowDetailsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "showDetailView")
+         showDetailView.showDetail = showsTopShowList[indexPath.row]
+         present(showDetailView, animated: false, completion: nil)
+         
+ }
+}
+
+class TopShowTableCell : UITableViewCell {
+    //@IBOutlet weak var searchedShowImage: UIImageView!
+    @IBOutlet weak var topShowImage: UIImageView!
+    //@IBOutlet weak var searchedShowTitle: UILabel!
+    @IBOutlet weak var topShowTitle: UILabel!
+    //@IBOutlet weak var searchedShowDescription: UILabel!feef
+    @IBOutlet weak var topShowDescription: UILabel!
 }
